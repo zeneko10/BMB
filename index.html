@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Minimalista</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            width: 360px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .display {
+            width: 100%;
+            height: 70px;
+            background-color: #333;
+            color: white;
+            font-size: 2.5rem;
+            text-align: right;
+            padding: 20px;
+            border-radius: 10px;
+            border: none;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            word-wrap: break-word;
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .button {
+            background-color: #f0f0f0;
+            border: none;
+            padding: 20px;
+            font-size: 1.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .button:active {
+            background-color: #d0d0d0;
+        }
+
+        .button.operator {
+            background-color: #fe9241;
+            color: white;
+        }
+
+        .button.operator:hover {
+            background-color: #fe7f00;
+        }
+
+        .button.clear {
+            background-color: #ff5c5c;
+            color: white;
+        }
+
+        .button.clear:hover {
+            background-color: #ff4040;
+        }
+
+        .button.equal {
+            background-color: #4caf50;
+            color: white;
+            grid-column: span 2;
+        }
+
+        .button.equal:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" disabled>
+
+        <div class="button-container">
+            <button class="button clear" onclick="clearDisplay()">C</button>
+            <button class="button operator" onclick="appendCharacter('/')">/</button>
+            <button class="button operator" onclick="appendCharacter('*')">*</button>
+            <button class="button operator" onclick="appendCharacter('-')">-</button>
+
+            <button class="button" onclick="appendCharacter('7')">7</button>
+            <button class="button" onclick="appendCharacter('8')">8</button>
+            <button class="button" onclick="appendCharacter('9')">9</button>
+            <button class="button operator" onclick="appendCharacter('+')">+</button>
+
+            <button class="button" onclick="appendCharacter('4')">4</button>
+            <button class="button" onclick="appendCharacter('5')">5</button>
+            <button class="button" onclick="appendCharacter('6')">6</button>
+            <button class="button equal" onclick="calculate()">=</button>
+
+            <button class="button" onclick="appendCharacter('1')">1</button>
+            <button class="button" onclick="appendCharacter('2')">2</button>
+            <button class="button" onclick="appendCharacter('3')">3</button>
+
+            <button class="button" onclick="appendCharacter('0')" style="grid-column: span 2;">0</button>
+            <button class="button" onclick="appendCharacter('.')">.</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+
+        function appendCharacter(character) {
+            display.value += character;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function calculate() {
+            try {
+                display.value = eval(display.value);
+            } catch (e) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
